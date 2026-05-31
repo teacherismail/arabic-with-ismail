@@ -55,6 +55,58 @@
     transition: color 0.2s;
   }
   .nav-links a:hover { color: var(--gold); }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--ink);
+    transition: all 0.3s;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 65px; left: 0; right: 0;
+    background: rgba(251,246,236,0.98);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201,151,58,0.2);
+    z-index: 99;
+    padding: 1.5rem 2rem;
+  }
+  .mobile-menu.open { display: block; }
+  .mobile-menu ul { list-style: none; }
+  .mobile-menu ul li { border-bottom: 1px solid rgba(201,151,58,0.15); }
+  .mobile-menu ul li a {
+    display: block;
+    padding: 1rem 0;
+    text-decoration: none;
+    color: var(--ink);
+    font-size: 1rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .mobile-menu ul li a:hover { color: var(--gold); }
+  .mobile-menu .mobile-cta {
+    color: var(--gold) !important;
+    font-weight: 500;
+  }
+  @media (max-width: 900px) {
+    .nav-links { display: none !important; }
+    .hamburger { display: flex; }
+  }
   .nav-cta {
     background: var(--gold); color: var(--dark);
     border: none; padding: 0.6rem 1.5rem;
@@ -522,15 +574,29 @@
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">Arabic<span>With</span>Ismail</div>
-  <ul class="nav-links">
-    <li><a href="#tracks">Programs</a></li>
-    <li><a href="#hollywood">For Actors</a></li>
-    <li><a href="#diplomats">For Diplomats</a></li>
-    <li><a href="#literature">Literature</a></li>
+  <a href="index.html" class="nav-logo">Arabic<span>With</span>Ismail</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="about.html">About</a></li>
+    <li><a href="ArabicWithIsmail-Pricing.html">Pricing</a></li>
+    <li><a href="programs.html">Programs</a></li>
+    <li><a href="blog.html">Blog</a></li>
   </ul>
-  <a href="#free-session" class="nav-cta">Free Session →</a>
+  <div style="display:flex;align-items:center;gap:1rem;">
+    <a href="book.html" class="nav-cta">Free Session →</a>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
+<div class="mobile-menu" id="mobileMenu">
+  <ul>
+    <li><a href="about.html" onclick="toggleMenu()">About</a></li>
+    <li><a href="ArabicWithIsmail-Pricing.html" onclick="toggleMenu()">Pricing</a></li>
+    <li><a href="programs.html" onclick="toggleMenu()">Programs</a></li>
+    <li><a href="blog.html" onclick="toggleMenu()">Blog</a></li>
+    <li><a href="book.html" onclick="toggleMenu()" class="mobile-cta">Free Session →</a></li>
+  </ul>
+</div>
 
 <!-- HERO -->
 <section class="hero">
